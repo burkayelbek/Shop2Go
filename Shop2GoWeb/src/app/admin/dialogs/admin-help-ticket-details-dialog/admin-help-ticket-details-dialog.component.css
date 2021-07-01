@@ -1,0 +1,7 @@
+::ng-deep .mat-form-field-infix{
+    padding: 7px 0 !important;
+}
+.special-divider{
+    margin-bottom: 15px;
+    border: 0.5px solid rgba(22, 22, 22, 0.644);
+}

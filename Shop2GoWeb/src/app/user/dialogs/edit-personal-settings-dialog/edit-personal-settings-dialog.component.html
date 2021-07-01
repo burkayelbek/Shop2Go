@@ -1,0 +1,37 @@
+<span><h1>Edit Personal Information</h1></span>
+
+<mat-divider></mat-divider>
+
+<div style="margin-top: 10px;">
+    <form [formGroup]="userDetailsForm" (ngSubmit)="UpdateUser(userDetailsForm.value)" autocomplete="off">
+        <div fxFlex="100" fxLayout="column">
+            <mat-form-field appearance="standard">
+                <mat-label>Username</mat-label>
+                <input matInput id="UserName" name="UserName" formControlName="UserName" placeholder="Username" > 
+                <span matSuffix><mat-icon>person</mat-icon></span>
+            </mat-form-field>
+            <div fxFlex fxLayoutGap="10px" fxFlex.lt-md="column">
+                <mat-form-field appearance="standard">
+                    <mat-label>Firstname</mat-label>
+                    <input matInput id="FirstName" name="FirstName" formControlName="FirstName" placeholder="Firstname"> 
+                    <span matSuffix><mat-icon>person_pin</mat-icon></span>
+                </mat-form-field>
+                    <mat-form-field appearance="standard">
+                    <mat-label>Surname</mat-label>
+                <input matInput id="LastName" name="LastName" formControlName="LastName" placeholder="Surname"> 
+                <span matSuffix><mat-icon>person_pin</mat-icon></span>
+                </mat-form-field>
+            </div>
+            <mat-form-field appearance="standard">
+                <mat-label>Email</mat-label>
+                <input matInput id="Email" name="Email"  formControlName="Email" placeholder="Email">
+                <span matSuffix><mat-icon>alternate_email</mat-icon></span>
+            </mat-form-field>
+            <div fxFlex fxLayoutAlign="space-between start">
+            <span><button mat-raised-button (click)="onNoClick($event)" color="warn">Cancel</button></span>
+            <span><button mat-raised-button type="submit" color="primary">Update</button></span>
+            </div>
+        </div>
+       
+    </form>
+</div>

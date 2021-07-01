@@ -1,0 +1,26 @@
+<div fxLayout="column" fxFlex >
+    <span fxLayout="row" fxLayoutAlign="start start" style="font-weight:550;margin-bottom:10px;font-size:20px;">
+        <mat-icon>category</mat-icon><mat-label style="margin-top:3px;margin-left:5px;" >Add New Category</mat-label>
+    </span>
+    <mat-divider></mat-divider>
+    <div fxLayout="column" fxLayoutAlign="center start" style="margin-top:15px;">
+        <form [formGroup]="categoryForm" autocomplete="off"  (ngSubmit)="AddCategory(categoryForm.value)">
+            <div fxLayout="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Category Name</mat-label>
+                    <input matInput placeholder="Category Name" formControlName="Name">
+                    <mat-hint><strong>Write a category name carefully</strong></mat-hint>
+                  </mat-form-field>
+    
+                  <mat-form-field appearance="outline">
+                    <mat-label>Mat Icon Name</mat-label>
+                    <input matInput placeholder="Mat Icon Name" formControlName="MatIconName">
+                    <mat-hint style="color:red;"><strong>* Before you write mat-icon name check names from this <a href="https://fonts.google.com/icons" target="_blank">website</a></strong></mat-hint>
+                  </mat-form-field>
+            </div>
+            <span style="margin-top:15px;" >
+                <button fxFlex mat-raised-button color="primary" type="submit" [disabled]="!categoryForm.valid" (click)="addCategoryDialog.close(true)"><mat-icon>add_task</mat-icon> Add Category</button>
+            </span>
+        </form>
+    </div>
+</div>

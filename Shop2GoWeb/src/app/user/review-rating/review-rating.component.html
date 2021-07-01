@@ -1,0 +1,21 @@
+<div fxLayout="column">
+    <div fxLayoutAlign="center start">
+        <span><strong>Rating & Comment</strong></span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start" style="margin-top:15px;">
+        <div *ngFor="let stars of starArr" [ngClass]="[stars.Class]" (click)="onClick(stars.Id)">
+            <mat-icon>{{stars.Icon}}</mat-icon>
+        </div>
+    </div>
+    <div>
+        <form [formGroup]="messageForm">
+            <mat-form-field appearance="fill" style="min-width: 320px;">
+                <mat-label>Comment</mat-label>
+                <textarea matInput rows="5" formControlName="Message"></textarea>
+              </mat-form-field>
+        </form>
+    </div>
+    <span>
+        <button mat-raised-button type="submit" color="primary" (click)="SendRateAndComment();reviewDialogRef.close(true)">Send</button>
+    </span>
+</div>

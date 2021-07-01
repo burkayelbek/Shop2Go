@@ -1,0 +1,45 @@
+<div fxLayout="row" fxLayoutAlign="center center"><h1 style="margin-top:15px;"><strong>Favorites</strong></h1></div>
+
+<div fxLayoutAlign="start center" style="margin:10px;" >
+    <div fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="start start" fxLayoutGap="10px grid" fxLayoutAlign.lt-md="start stretch" style="margin:5px;">
+        <div *ngFor="let item of userProducts;let i = index" fxFlex.xs="0 0 calc(100% - 10px)" fxFlex.sm="0 0 calc(50%-10px)" fxFlex.md="0 0 calc(33% - 10px)"> 
+            <mat-card class="example-card" (click)="ProductDetailNavigate(item.favoritedProducts[i].ProductId)">
+                <div fxLayout="row wrap" fxLayoutAlign="start start" style="margin-left:10px;" fxLayoutGap="10px">
+                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex>
+                        <span style="padding:0;margin:0;"><h1><strong>{{item.favoritedProducts[i].Products.User.UserName}}</strong></h1></span>
+                        <span class="date-style">{{item.favoritedProducts[i].Products.PublishedDate | date:'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign="center end" fxFlex="1 1 auto" fxLayout.lt-lg="row" fxLayoutAlign.lt-lg="space-between start">
+                        <div fxFlex fxLayoutAlign="end start" fxLayout="row wrap">
+                            <span>
+                                <button mat-icon-button  matTooltip="Send Message" (click)="MessageDetailNavigate(item.favoritedProducts[i].UserID);$event.stopPropagation();">
+                                    <fa-icon [icon]="commentIcon" style="font-size: large;"></fa-icon>
+                                </button>
+                            </span>
+                            <span>
+                                <button mat-icon-button  matTooltip="Add/Remove Favorite" (click)="ToggleFavorite(item.favoritedProducts[i].ProductId);$event.stopPropagation();">
+                                    <mat-icon color="warn">favorite</mat-icon>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                 <div style="margin-top:10px;" fxLayout="column">
+                    <div fxFlex>
+                        <ng-image-slider #nav [images]="[{image:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', thumbImage:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', alt:'', title:''}]" [arrowKeyMove]="false" [showArrow]="false" [imageSize]="{width: '100%', height: 150}" slideImage="1">
+                        </ng-image-slider>
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start start">
+                    <span class="category-style"><p class="p-position">{{item.favoritedProducts[i].Products.Category.Name}}</p></span>
+                    <span class="position"><h1  style="padding:0;margin:0"><strong>{{item.favoritedProducts[i].Products.Title}}</strong></h1></span>
+                    <span ><h3 class="h3-properties">{{item.favoritedProducts[i].Products.Price}} ₺</h3></span>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<div style="text-align: center; color: #3F51B5;margin:5px 15px;">
+    <h1 *ngIf="isArrayEmpty(userProducts)" >There are no any favorited products!</h1>
+</div>

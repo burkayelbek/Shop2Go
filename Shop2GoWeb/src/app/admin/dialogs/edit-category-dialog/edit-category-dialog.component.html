@@ -1,0 +1,26 @@
+<div fxLayout="column" fxFlex>
+    <span fxLayout="row" fxLayoutAlign="center start" style="font-weight:550;font-size:20px;">
+        <h1>Edit Category</h1>
+    </span>
+    <mat-divider></mat-divider>
+    <div fxLayout="column" fxLayoutAlign="center start" style="margin-top:15px;" fxFlex>
+        <form [formGroup]="categoryEditForm" (ngSubmit)="UpdateCategory(categoryEditForm.value)" autocomplete="off">
+            <div fxLayout="column">
+                <mat-form-field appearance="standard">
+                    <mat-label>Category Name</mat-label>
+                    <input matInput id="Name" name="Name" formControlName="Name" placeholder="Category Name" > 
+                    <span matSuffix><mat-icon>category</mat-icon></span>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Mat Icon Name</mat-label>
+                    <input matInput id="MatIconName" name="MatIconName" formControlName="MatIconName" placeholder="Mat Icon Name"> 
+                    <mat-hint style="color:red;"><strong>* Before you write mat-icon name check names from this <a href="https://fonts.google.com/icons" target="_blank">website</a></strong></mat-hint>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="5px" style="margin-top:25px;" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start stretch">
+                <button mat-raised-button (click)="onNoClick($event)" color="warn">Cancel</button>
+                <button mat-raised-button type="submit" color="primary" (click)="editCategoryDialog.close(true)">Update</button>
+            </div>
+        </form>
+    </div>
+</div>

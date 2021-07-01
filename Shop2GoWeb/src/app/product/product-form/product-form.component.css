@@ -1,0 +1,34 @@
+.mat-form-field {
+    margin-right: 5px;
+  }
+
+.mat-raised-button {
+    width: 100%;
+    margin-top: 20px;
+    padding:2px 5px;
+}
+
+.mat-settings{
+  width: 100px;
+  padding:2px 5px;
+  margin-top: 0px;
+  font-size:15px;
+}
+::ng-deep .mat-raised-button:hover{
+  background-color: #2a3677;
+  transition: all 250ms linear;
+  border: 1px solid rgba(#000, .05);
+  box-shadow: 1px 1px 2px rgba(#fff, .2);
+}
+.select-file{
+  padding:6px 0;
+  padding-right: 5px;
+  padding-left:5px;
+  margin-top: 0px;
+  text-align: center;
+  font-size:15px;
+}
+.select-file:hover{
+  background-color:#3f51b5;
+  color:white;
+}

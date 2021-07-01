@@ -1,0 +1,95 @@
+<div class="content-container">
+  <div class="example-card"  fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px" fxLayout.lt-lg="column" fxLayoutAlign="center stretch">
+      <div fxLayout="column" fxLayoutAlign="start center">
+        <div *ngIf="userDetails" class="avatar-container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <span ><h2 style="margin-bottom: 0;"><strong>@{{userDetails.UserName}}</strong></h2></span>
+        </div>
+        <div mat-card-avatar class="example-header-image">
+          <img [src]="ProfilePicture?ProfilePicture:'assets/images/user.svg' | safe ">
+        </div>
+        <div *ngIf="userDetails" fxLayout="column" style="margin-left:20px;margin-top:5px;" fxLayoutAlign="start center">
+          <span ><h2 style="margin-bottom: 0;text-transform: capitalize;"><strong>{{userDetails.FirstName}} {{userDetails.LastName}}</strong></h2></span>
+          <div fxLayout="row" fxLayoutGap="2px" (click)="tabs.selectedIndex=1" class="star-click">
+            <span style="font-weight: 500;">{{AverageRating | number: '1.0-2'}}</span>
+            <div *ngFor="let num of starArr">
+              <span class="star on" *ngIf="AverageRating - num.Id >= 0;else halfStar"></span>
+              <ng-template #halfStar ><span class="star half" *ngIf="(AverageRating - (num.Id - 1)) % 1 > 0;else emptyStar " ></span></ng-template>
+              <ng-template #emptyStar ><span class="star" ></span></ng-template>
+            </div>
+            <span style="font-weight: 500;">({{countReviews?countReviews:'0'}})</span>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center start">
+              <button mat-icon-button  matTooltip="Send Message" *ngIf="!roleMatchAdmin() && !checkUserId(userDetails.Id)" (click)="MessageDetailNavigate(userDetails.Id);$event.stopPropagation();">
+                  <fa-icon  [icon]="commentIcon" style="font-size: large;color:#494949"></fa-icon>
+              </button>
+
+              <button mat-icon-button  matTooltip="Rate & Comment" *ngIf="!roleMatchAdmin() && !checkUserId(userDetails.Id) && canRate" (click)="openReviewDialog(userDetails.Id);$event.stopPropagation();">
+                <mat-icon style="color:green"> thumb_up </mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+        
+        <mat-card fxFlex >
+          <mat-tab-group  dynamicHeight (selectedTabChange)="tabClick($event)" #tabs>
+            <mat-tab label="Listings" >
+              <span class="information-header" fxLayout="row" fxLayoutAlign="start start" ><h1><strong>Listings</strong></h1></span>
+              <div fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="start start" fxLayoutGap="10px grid" fxLayoutAlign.lt-md="start stretch" >
+                <h1 fxFlex *ngIf="isArrayEmpty(userProducts) && checkUserIdWithoutParameter()" style="text-align: center; color: #3F51B5">Start by put your products in Product Management!</h1>
+                <div *ngFor="let item of userProducts" fxFlex.xs="0 0 calc(100% - 10px)" fxFlex.sm="0 0 calc(100%-10px)" fxFlex.md="0 0 calc(50%-10px)" style="margin-left:5px;margin-bottom: 15px;"> 
+                    <mat-card class="mat-card-products" (click)="ProductDetailNavigate(item.tempProduct.Id)" >
+                        <div fxLayout="row wrap" fxLayoutAlign="start start"style="margin-left:10px;">
+                            <div fxLayout="column" fxLayoutAlign="start start" fxFlex>
+                                <span class="position"><h1  style="padding:0;margin:0"><strong>{{item.tempProduct.Title}}</strong></h1></span>
+                                <span class="date-style">{{item.tempProduct.PublishedDate | date: 'dd/MM/yyyy'}}</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px;" fxLayout="column">
+                            <div fxFlex>
+                                <ng-image-slider #nav [images]="[{image:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', thumbImage:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', alt:'', title:''}]" [arrowKeyMove]="false" [showArrow]="false" [imageSize]="{width: '100%', height: 275}" slideImage="1">
+                                </ng-image-slider>
+                            </div>
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="start start">
+                            <span class="category-style"><p class="p-position">{{item.tempProduct.Category.Name}}</p></span>
+                            <span ><h3 class="h3-properties">{{item.tempProduct.Price}} ₺</h3></span>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+            </mat-tab>
+            <mat-tab label="Reviews">
+              <div fxLayout="column" style="overflow-y:auto;height: 700px;">
+                <h1 fxFlex fxLayoutAlign="center start" *ngIf="isArrayEmpty(reviewComments) && checkUserIdWithoutParameter()" style="margin-top:25px; color: #3F51B5">There are no reviews!</h1>
+                <div *ngFor="let item of reviewComments;let last = last" >
+                  <div fxLayout="column" style="padding-left:25px;padding-right:50px;padding-top:25px;">
+                    <div fxLayout="row" fxLayoutGap="5px" style="margin-bottom:5px;">
+                      <div fxLayout="row">
+                        <span style="font-weight: 600;font-size: 18px;padding-left:4px;text-transform: capitalize;text-decoration: underline;cursor:pointer" (click)="ProfileDetailNavigate(item.SenderId)">{{item.SenderFullName}}</span>
+                        <span style="font-style: italic;font-weight: 500;"><strong> - </strong>{{item.SentTime  | date:'dd/MM/yyyy HH:mm'}}</span>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="end start" fxFlex *ngIf="roleMatchAdmin()">
+                        <button mat-icon-button matTooltip="Delete of Ticket" type="submit" *ngIf="roleMatchAdmin()" (click)="openDeleteReviewDialog(item.Id)" ><mat-icon color="warn">delete</mat-icon></button>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div *ngFor="let num of starArr"  >
+                        <span class="star on" *ngIf="item.StarRating + 1 - num.Id > 0.5;else other_content "></span>
+                        <ng-template #other_content><span class="star" ></span></ng-template>
+                      </div>
+                    </div>
+                    <div fxLayout="column" class= "text-wrapper">
+                      <p>{{item.Comment}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card>
+    </div>
+  </div>
+   
+</div>

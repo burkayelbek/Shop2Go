@@ -1,0 +1,17 @@
+.approve{
+    color: #fff;
+    
+}
+
+.approve:hover{
+    background-color: #153961;
+}
+
+.rejected{
+    background-color:red;
+    color:#fff
+}
+
+.rejected:hover{
+    background-color:rgb(153, 31, 31);
+}

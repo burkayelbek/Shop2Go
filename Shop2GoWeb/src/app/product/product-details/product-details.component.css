@@ -1,0 +1,157 @@
+.desc-container{
+    margin-left: 15px;
+    margin-top:20px;
+}
+
+.desc-header{
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.desc-content{
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 15px;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.title-content{
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-transform: uppercase;
+}
+
+.example-card {
+    max-width: 1000px;
+    min-width: 320px;
+    width: 100%;
+    margin-top:15px;
+    box-shadow: 0px 0px 10px 2px rgb(158, 156, 156);
+}
+.product-card{
+    max-width: 450px;
+    min-width: 250px;
+    margin-top:15px;
+    margin-bottom:5%
+}
+
+.product-card:hover {
+    box-shadow: 3px 3px 10px 0.5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow:3px 3px 10px 0.5px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow:3px 3px 10px 0.5px rgba(0, 0, 0, 0.5);
+    cursor:pointer;
+  }
+
+a{
+    text-decoration: none;
+    color: rgb(47, 69, 167);
+    font-weight: 600;
+}
+.category-style{
+    letter-spacing: 2px; 
+    color: rgb(158, 156, 156);
+    font-weight: 550;
+    text-transform: uppercase;
+}
+.date-style{
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.mat-flat-button:hover{
+    background-color: #cfd7db;
+}
+.mat-raised-button:hover{
+    background-color: #2a3572;
+}
+.content-header{
+    margin-left:15px;
+    margin-top:40px;
+}
+
+.btn-second-style{
+    background-color: rgb(226, 232, 235);
+    white-space: normal;
+}
+.second-btn-container{
+    margin-left:15px; 
+    margin-top:4px;
+}
+
+.mat-icon-button:hover{
+    transform:translateY(-3px) scale(1.3) translateZ(0);
+    transition: 0.2s ease-in-out;
+}
+
+.username-text{
+    margin-right:15px;
+    margin-left:15px;
+    margin-top:7px;
+    font-weight: bold;
+}
+
+.example-header-image {
+    width: 75px;
+    height: 75px;
+    margin-top:5px;
+    margin-right: 17px;
+    margin-left:20px;
+}
+
+.example-header-image:hover{
+    transform:translateY(-3px) scale(1.3) translateZ(0);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.header-image {
+    width: 50px;
+    height: 50px;
+    margin-top:10px;
+    margin-right: 15px;
+}
+
+.rnd-user-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    object-fit: cover;
+}
+
+img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-size: cover;
+    object-fit: cover;
+}
+
+
+:host /deep/ .ng-image-slider .ng-image-slider-container .main .main-inner .img-div{
+    box-shadow: none!important;
+}
+
+.star {  /*Initialize star*/
+    font-size: x-large;
+    width: 20px;
+    display: inline-block;
+    color: gray;
+  }
+  
+  .star:before {
+      content:'\2605'; /*Creates star*/
+  }
+  .star.on {
+      color: gold; /*Gives color first */
+  }
+  .star.half:after {
+    content:'\2605';
+    color: gold;
+    position: absolute;
+    margin-left: -20px;
+    width: 10px;
+    overflow: hidden;
+  }

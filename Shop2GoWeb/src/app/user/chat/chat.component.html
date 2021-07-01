@@ -1,0 +1,47 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="margin-top:15px;">
+    <div fxLayoutGap="10px" fxLayout="row" fxFlex="75" fxLayout.lt-md="column">
+        <div fxLayout="column" >
+            <mat-card style="padding-bottom: 5px;" >
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.lt-md="start start" fxFlex>
+                    <h5 *ngIf="isArrayEmpty(conversations)" style="text-align: center; color: #3F51B5">You have no conversations.</h5>
+                    <div *ngFor="let convo of conversations" (click)="openMessages(convo.ConversationDetails.conversationId);" fxLayout="row" fxLayoutAlign="start stretch"  fxFlex class="conversation-person">
+                        <div mat-card-avatar class="header-image" style="cursor: pointer;">
+                            <img [src]="convo.ppResult.ProfilePicture?convo.ppResult.ProfilePicture:'assets/images/user.svg' | safe ">
+                        </div>
+                        <div fxLayout="column" class="conversation" fxFlex >
+                            <h3 style="font-size:20px; font-weight: 500;margin-top:5px;"> {{convo.ConversationDetails.participantFullName}}</h3>
+                            <mat-card-subtitle style="font-size:12px; font-style: italic;">{{convo.ConversationDetails.sentTime | date:'dd/MM/yyyy HH:mm'}}</mat-card-subtitle>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex>
+            <mat-card>
+                <div #scrollMe style="overflow-y: auto;height: 675x;"  fxLayout="column">
+                    <h1 *ngIf="isArrayEmpty(chatHistory) && participantId === undefined" style="text-align: center; color: #3F51B5">Pick someone to start a conversation!</h1>
+                    <h1 *ngIf="isArrayEmpty(chatHistory)&& participantId !== undefined" style="text-align: center; color: #3F51B5">Start by sending the first message!</h1>
+                    <div *ngFor="let message of chatHistory" [ngClass]="message.SenderId == userId ? 'chat-bubble msg-self': 'chat-bubble2 msg-friend'"  fxLayout="column" style="padding:5px 10px;margin:3px 15px;" >
+                        <h3 style="text-transform: capitalize;font-weight: 550;">{{message.SenderFullName}}</h3>
+                        <p style="text-transform: initial;font-size:16px;" >{{message.Message}}</p>
+                        <mat-card-subtitle style="color: white;font-size:12px; font-style: italic;">{{message.SentTime | date:'dd/MM/yyyy HH:mm'}}</mat-card-subtitle>
+                    </div>
+                </div>
+                <div  fxLayout="column" style="margin:10px 5px;" *ngIf="sendMessageFieldForm" >
+                    <form [formGroup]="sendMessageFieldForm" (ngSubmit)="SendMessage()">
+                        <mat-form-field appearance="fill" fxFlex>
+                            <mat-label style="font-size: 550;font-size: 16px;">Send message</mat-label>
+                            <input  matInput placeholder="Send message" formControlName="Message" style="font-size: 16px;padding-top:8px;" onKeyPress="if(this.value.length==200) return false;" maxlength="200">
+                            <span matSuffix fxLayoutAlign="start start" >
+                                <button type="submit" (click)="$event.stopPropagation()" class="send-button"> 
+                                    <mat-icon>send</mat-icon>
+                                </button>
+                             </span>
+                        </mat-form-field>
+                    </form>
+                </div>
+                
+            </mat-card>
+        </div>
+    </div>
+</div>

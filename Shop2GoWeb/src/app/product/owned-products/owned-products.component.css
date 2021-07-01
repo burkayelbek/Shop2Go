@@ -1,0 +1,53 @@
+.example-card {
+    max-width: 400px;
+    min-width: 200px;
+    
+}
+.mat-card:hover {
+  box-shadow: 3px 3px 16px -2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:3px 3px 16px -2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow:3px 3px 16px -2px rgba(0, 0, 0, 0.5);
+  cursor:pointer;
+}
+
+.date-style{
+  font-weight: 500;
+  font-size: 15px;
+}
+.category-style{
+  letter-spacing: 2px; 
+  color: rgb(158, 156, 156);
+  font-weight: bold;
+  margin-left:5px;
+  margin-top:5px;
+  text-transform: uppercase;
+}
+.position{
+  padding:0;
+  margin-top:0px;
+  margin-bottom:0px;
+  margin-top:0px;
+  text-transform: capitalize;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.p-position{
+  padding:0;
+  margin:0;
+}
+
+.h3-properties{
+  margin-top:10px;
+  margin-left:5px;
+  font-weight: 500;
+}
+
+.mat-icon-button:hover{
+  transform:translateY(-3px) scale(1.3) translateZ(0);
+  transition: 0.2s ease-in-out;
+}
+:host /deep/ .ng-image-slider .ng-image-slider-container .main .main-inner .img-div{
+  box-shadow: none!important;
+}

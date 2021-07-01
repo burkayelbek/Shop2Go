@@ -1,0 +1,21 @@
+<div #scrollMe style="overflow-y: auto;max-height: 700px;min-height: 400px;"  fxLayout="column" >
+    <div *ngFor="let message of chatHistory" [ngClass]="message.SenderId == userId ? 'chat-bubble msg-self': 'chat-bubble2 msg-friend'"  fxLayout="column" style="padding:5px 10px;margin:3px 10px;" >
+        <h3 style="text-transform: capitalize;font-weight: 550;">{{message.SenderFullName}}</h3>
+        <p style="text-transform: initial;font-size:16px;" >{{message.Message}}</p>
+        <mat-card-subtitle style="color: white;font-size:12px; font-style: italic;">{{message.SentTime | date:'dd/MM/yyyy HH:mm'}}</mat-card-subtitle>
+    </div>
+</div>
+
+<div fxLayout="column" style="margin:10px 5px;">
+    <form [formGroup]="sendMessageFieldForm" *ngIf="sendMessageFieldForm" (ngSubmit)="SendMessage(sendMessageFieldForm.value)">
+        <mat-form-field appearance="fill" fxFlex>
+            <mat-label style="font-size: 550;font-size: 18px;">Send message</mat-label>
+            <input  matInput placeholder="Send message" formControlName="Message" style="font-size: 18px;padding-top:8px;">
+            <span matSuffix fxLayoutAlign="start start" >
+                <button type="submit" class="send-button">
+                    <mat-icon>send</mat-icon>
+                </button>
+             </span>
+        </mat-form-field>
+    </form>
+</div>

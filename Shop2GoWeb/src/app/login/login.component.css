@@ -1,0 +1,31 @@
+.login-toolbar {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+.login-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    box-shadow: 3px -4px 4px 4px rgba(107, 107, 109, 0.2); /* offset-x | offset-y | blur-radius | spread-radius | color */
+}
+  
+form {
+    width: 100%;
+}
+
+.mat-raised-button {
+    width: 100%;
+    margin-top: 10px;
+    height:45px;
+}
+.mat-form-field{
+    margin: 5px;
+}
+
+a{
+    text-decoration: none;
+}

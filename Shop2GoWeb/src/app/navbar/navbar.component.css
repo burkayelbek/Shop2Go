@@ -1,0 +1,25 @@
+#special-cursor{
+    cursor: pointer;
+    outline: none;
+    border:none;
+    -webkit-tap-highlight-color: transparent;
+}
+#special-cursor:hover{
+    background-color: #3D4EAE;
+}
+
+.mat-stroked-button{
+    border:none;
+
+}
+
+.sellButton{
+  border: 2px solid white;
+  border-radius: 20px;
+}
+::ng-deep .mat-toolbar{
+    z-index: 1000; 
+    position: sticky;
+    position: -webkit-sticky; 
+    top: 0;
+  }

@@ -1,0 +1,9 @@
+<h1 fxLayoutAlign="center center"><strong>DELETE</strong></h1>
+<mat-divider style="margin-bottom: 10px;"></mat-divider>
+<div>
+    <h3><p>Do you want to delete the category?</p></h3>
+</div>
+<div fxLayoutGap="5px" fxLayoutAlign="space-between start">
+  <button mat-raised-button class="cancel" (click)="onNoClick($event)">Cancel</button>
+  <button mat-raised-button  class="rejected" (click)="deleteCategoryDialog.close(true)">Delete</button>
+</div>

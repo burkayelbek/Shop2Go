@@ -1,0 +1,29 @@
+<div fxflex="100" fxLayoutAlign="center center" style="margin-top:20px;">
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center none" fxFlex="75" fxLayout.lt-lg="column" fxLayoutAlign.lt-lg="start stretch">
+    <mat-card fxFlex="calc(25%-10px)" >
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" style="height: 100%;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>account_circle</mat-icon> <span class="menu-header">Account</span> 
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <ul>
+            <li><button mat-button [routerLink]="['/User/Personal-Information']" (click)="showPersonalInformationPage()"><span class="material-icons">account_circle</span> <span style="margin-left:5px;font-weight: 600;">Personal Information</span></button></li>
+            <mat-divider></mat-divider>
+            <li><button mat-button [routerLink]="['/User/Ticket']" (click)="showTicketPage()"*ngIf="roleMatchUser()"><fa-icon style="margin-left:3px;font-size: medium;" [icon]="sendTicketIcon"></fa-icon> <span style="margin-left:10px;font-weight: 600;">Contact Support Team</span> </button></li>
+            <mat-divider></mat-divider>
+            <li><button mat-button [routerLink]="['/User/My-Tickets']" (click)="MyTicketPage()"*ngIf="roleMatchUser()"><fa-icon style="margin-left:3px;font-size: medium;" [icon]="myTicketIcon"></fa-icon><span style="margin-left:8px;font-weight: 600;">My Support Tickets</span> </button></li>
+          </ul>
+        </mat-expansion-panel>
+    
+      </mat-accordion>
+    </mat-card>
+    <div fxFlex="calc(75%-10px)" >
+      <app-personal-information *ngIf="personalInformation" ></app-personal-information> 
+      <app-help-ticket *ngIf="sendTicket"></app-help-ticket>
+      <app-my-tickets *ngIf="myticket"></app-my-tickets>
+    </div>
+  </div>
+</div>

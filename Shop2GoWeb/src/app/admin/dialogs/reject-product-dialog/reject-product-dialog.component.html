@@ -1,0 +1,32 @@
+<div>
+  <form [formGroup]="rejectedForm" (ngSubmit)="RejectProduct(rejectedForm.value)" autocomplete="off">
+    <div fxLayout="column">
+      <h1 fxLayoutAlign="center center"><strong>REJECT</strong></h1>
+      <mat-divider style="margin-bottom: 10px;"></mat-divider>
+      <div>
+          <h3><p>Do you want to reject the product?</p></h3>
+      </div>
+      <div fxFlex fxLayout="column">
+        <span><mat-label style="font-weight: bold;">Rejected Message</mat-label></span>
+          <div fxFlex="100">
+          <mat-form-field appearance="outline" fxFlex="100">
+            <textarea matInput
+            formControlName="RejectedMessage"
+            id="FeedbackMessage" 
+            name="FeedbackMessage"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="4"
+            cdkAutosizeMaxRows="20"
+            style="font-weight: 500;"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayoutGap="5px" fxLayoutAlign="space-between start">
+        <button mat-raised-button class="cancel" (click)="onNoClick($event)">Cancel</button>
+        <button mat-button class="rejected" (click)="dialogRef.close(true)">Reject</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,62 @@
+<div fxLayoutAlign="center center" style="margin: 5px;">
+    <form [formGroup]="userSignUpForm" (ngSubmit)="PostUser(userSignUpForm.value)" autocomplete="off">
+        <mat-card fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="center start">
+                <mat-icon style="margin-top:4px">app_registration</mat-icon>
+                <mat-label> <strong><h2> Register Account</h2></strong></mat-label>
+            </div>      
+            <div fxLayout="row" fxLayoutGap="5px" fxLayout.xs="column" fxFlex>
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Firstname</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input matInput id="FirstName" name="FirstName" formControlName="FirstName" placeholder="Firstname" required>     
+                </mat-form-field>     
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Lastname</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input matInput id="LastName" name="LastName" formControlName="LastName" placeholder="Lastname" required><br>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="fill" >
+                <mat-label style="padding-left:6px;">Username</mat-label>
+                <fa-icon [icon]="userNameIcon" matPrefix style="position: relative;bottom:7px;"></fa-icon>
+                <input matInput id="UserName" name="UserName" formControlName="UserName" placeholder="Username" required style="padding-left:5px;">
+            </mat-form-field>
+          
+            <mat-form-field appearance="fill" >
+                <mat-label>Email</mat-label>
+                <mat-icon matPrefix>email</mat-icon>
+                <input matInput id="Email" name="Email" formControlName="Email" placeholder="Email" required>
+            </mat-form-field>
+            <div fxLayoutGap="10px" fxLayout.xs="column" fxLayoutGap.xs="0" >
+                <mat-form-field appearance="fill"  fxLayoutAlign.xs="start stretch">
+                    <mat-label>Enter your password</mat-label>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <input matInput [type]="hide ? 'password' : 'text'" type="password" matInput id="Password" name="Password" formControlName="Password" placeholder="Password" required minlength="6" >
+                    <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill"  fxLayoutAlign.xs="start stretch">
+                    <mat-label>Enter your password</mat-label>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <input matInput [type]="hide ? 'password' : 'text'" type="password" id="ConfirmPassword" name="ConfirmPassword" formControlName="ConfirmPassword" placeholder="ConfirmPassword" required minlength="6" >
+                    <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <span fxLayoutAlign="center center">
+                <label *ngIf="Password.touched && Password.errors?.minlength" style="color:red;"><strong>Minimum 6 characters required</strong></label>
+            </span>
+            <span fxLayoutAlign="center center">
+                <label *ngIf="ConfirmPassword.touched && ConfirmPassword.errors?.passwordMismatch" style="color:red;"><strong>Password does not match!</strong></label>
+            </span>
+
+          <button mat-raised-button type="submit" color="primary" [disabled]="!userSignUpForm.valid">Register</button>
+          
+        </mat-card>
+  </form>
+</div>

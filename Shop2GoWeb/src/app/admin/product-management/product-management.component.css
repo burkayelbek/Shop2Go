@@ -1,0 +1,86 @@
+.example-card {
+    max-width: 750px;
+    min-width: 250px;
+}
+
+.mat-card:hover {
+    box-shadow: 3px 3px 16px -2px rgba(0, 0, 0, 0.5); /* offset-x / offset-y / blur-radios / spread-radius / color*/
+    -moz-box-shadow:3px 3px 16px -2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow:3px 3px 16px -2px rgba(0, 0, 0, 0.5);
+    cursor:pointer;
+}
+
+.icon-view{
+    font-size:18px;
+    color:  green;
+}
+::ng-deep .mat-icon-button{
+    width: 30px;
+    height: 30px;
+    line-height: 0;
+}
+
+.mat-icon-button:hover{
+    transform:translateY(-3px) scale(1.4) translateZ(0);
+    transition: 0.2s ease-in-out;
+    cursor:pointer;
+}
+
+.text-color{
+    color:white;
+  }
+
+.date-style{
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom:10px;
+}
+.category-style{
+    letter-spacing: 2px; 
+    color: rgb(158, 156, 156);
+    font-weight: bold;
+    margin-left:5px;
+    text-transform: uppercase;
+    margin-top:10px;
+}
+.position{
+    padding:0;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-top:5px;
+    margin-left:5px;
+    text-transform: capitalize;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.p-position{
+    padding:0;
+    margin:0;
+}
+
+.h2-properties{
+    margin-top:10px;
+    margin-left:2px;
+    font-weight: 500;
+}
+
+img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    object-fit: cover;
+}
+  
+.header-image {
+    width: 50px;
+    height: 50px;
+    margin-top:10px;
+    margin-right: 15px;
+}
+
+:host /deep/ .ng-image-slider .ng-image-slider-container .main .main-inner .img-div{
+    box-shadow: none!important;
+}

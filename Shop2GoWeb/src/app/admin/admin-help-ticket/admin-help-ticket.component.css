@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+}
+  
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.container-table{
+  margin:15px;
+}
+
+.closed-ticket-btn{
+  color:white;
+}
+
+.mat-elevation-z8{
+  width: 100%;
+  overflow-x:auto;
+  font-weight: 550;
+}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding: 0 8px !important;
+}
+
+.delete-selected-btn{
+  margin:5px 5px;
+  background-color:red;
+  color:white;
+}

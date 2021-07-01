@@ -1,0 +1,20 @@
+::ng-deep .mat-form-field-infix{
+    padding: 7px 0 !important;
+}
+.rejected{
+    background-color:red;
+    color:#fff
+}
+
+.rejected:hover{
+    background-color:rgb(153, 31, 31);
+}
+
+.cancel{
+    background-color:#fff;
+    color:#153961
+}
+
+.cancel:hover{
+    background-color:rgb(228, 228, 228);
+}

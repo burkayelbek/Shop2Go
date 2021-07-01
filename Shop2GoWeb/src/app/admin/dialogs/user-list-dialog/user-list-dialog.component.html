@@ -1,0 +1,68 @@
+<div class="content-container">
+    <div fxLayoutAlign="end start">
+        <button mat-icon-button (click)="dialogRef.close(true)">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="recievedData" style="margin:5px 5px;">
+        <div class="example-card" style="width: 100%;" fxLayout="column">
+            <div fxLayout="column">
+                <div class="avatar-container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <span class="avatar-image-text"><strong>Profile Image</strong></span>
+                    <div mat-card-avatar class="example-header-image">
+                    <img  [src]="recievedData.value.ppResult.ProfilePicture?recievedData.value.ppResult.ProfilePicture:'assets/images/user.svg' | safe ">
+                    </div>
+                </div>
+                <div  fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px" fxLayout.lt-lg="column" fxLayoutAlign="center stretch">
+                    <mat-card fxFlex style="padding-bottom: 0;">
+                        <span fxLayout="row" fxLayoutAlign="center start" > <fa-icon [icon]="personalInformationIcon" style="font-size:medium;padding-right: 5px;color:green"></fa-icon> <strong> Personal Information</strong></span>
+                            <div fxLayout="column" fxLayoutAlign="start start" style="margin-top:15px;">
+                                <div fxLayout="row" style="margin-bottom:15px;">
+                                    <mat-icon>person</mat-icon>
+                                    <span fxLayout="row" class="personal-information-content">
+                                        <mat-label >User ID: </mat-label>
+                                        <p >{{recievedData.value.user.Id}}</p>
+                                    </span>
+                                </div>
+        
+                                <div  fxLayout="row"  style="margin-bottom:15px;">
+                                    <mat-icon>person_pin</mat-icon>
+                                    <span fxLayout="row" class="personal-information-content">
+                                        <mat-label >Username: </mat-label>
+                                        <p >{{recievedData.value.user.UserName}}</p>
+                                    </span>
+                                </div>
+        
+                                <div fxLayout="row"  style="margin-bottom:15px;">
+                                    <mat-icon>person_pin</mat-icon>
+                                    <span fxLayout="row" class="personal-information-content">
+                                        <mat-label>Name & Surname: </mat-label>
+                                        <p >{{recievedData.value.user.FullName}}</p>
+                                    </span>
+                                </div>
+        
+                                <div fxLayout="row"  style="margin-bottom:15px;">
+                                    <mat-icon>alternate_email</mat-icon>
+                                    <span fxLayout="row" class="personal-information-content">
+                                        <mat-label>Email: </mat-label>
+                                        <p >{{recievedData.value.user.Email}}</p>
+                                    </span>
+                                </div>
+                            </div>
+                        </mat-card>
+                </div>
+                <div fxLayout="column" fxLayoutGap="10px" fxFlex  fxLayoutAlign="center center" fxFlex style="margin-top:15px">
+                    <button mat-raised-button fxFlexFill [matMenuTriggerFor]="dropMenu"color="primary">
+                        <mat-icon>menu</mat-icon> User Operations
+                    </button>
+                    <mat-menu #dropMenu="matMenu" >
+                        <button fxFlexFill mat-menu-item style="color:black;text-align: left;font-weight: 550;" (click)="openSendMailDialog(recievedData.value.user)"><fa-icon [icon]="mailIcon" style="font-size:medium;padding-right: 5px;color:black"></fa-icon> Send Mail</button>
+                        <button fxFlexFill mat-menu-item style="color:rgb(241, 36, 36);text-align: left;font-weight: 550;" (click)="openRestrictDialog(recievedData.value.user.Id)" *ngIf="recievedData.value.restrictedUserInformation==null"> <fa-icon [icon]="restrictIcon" style="font-size:medium;padding-right: 5px;color:rgb(241, 36, 36)"></fa-icon>Restrict User Account</button>
+                        <button fxFlexFill mat-menu-item style="color:#3f51b5;text-align: left;font-weight: 550;" (click)="openRemoveRestrictionDialog(recievedData.value.user.Id)" *ngIf="recievedData.value.restrictedUserInformation!=null"> <fa-icon [icon]="openRestrictionIcon" style="font-size:medium;padding-right: 5px;color:#3f51b5;"></fa-icon>Remove Restriction</button>
+                    </mat-menu>
+                    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>

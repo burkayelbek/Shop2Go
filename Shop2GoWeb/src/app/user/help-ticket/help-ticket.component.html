@@ -1,0 +1,41 @@
+<mat-card fxFlex>
+  <div fxLayout="row" fxLayoutAlign="start start" class="header-text"><h1 style="margin:0"> <strong>Create New Ticket</strong></h1></div>
+  <form [formGroup]="ticketForm" (ngSubmit)="SendUserTicket(ticketForm.value)" autocomplete="off">
+    <div fxLayout="row wrap" fxFlex  >
+      <div fxLayout="column" fxFlexFill style="padding:30px;">
+
+        <mat-label><strong>Ticket's Title</strong></mat-label>
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput id="Title" name="Title" formControlName="Title" placeholder="Title" required>
+        </mat-form-field>
+  
+        <mat-label><strong>Ticket's Message</strong></mat-label>
+        <mat-form-field appearance="outline">
+          <mat-label>Message</mat-label>
+          <textarea matInput 
+          formControlName="Message"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="15"
+          required></textarea>
+        </mat-form-field>
+  
+        <mat-label><strong>Ticket's Priority</strong></mat-label>
+        <mat-form-field appearance="fill" >
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="Priority" [(value)]="selected" required>
+            <mat-option [value]="0" class="low" >Low</mat-option>
+            <mat-option [value]="1" class="medium">Medium</mat-option>
+            <mat-option [value]="2" class="high">High</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>
+         <button mat-raised-button type="submit" color="primary"> <fa-icon [icon]="sendIcon"></fa-icon> Submit Support Ticket</button>
+        </span>
+      </div>
+    </div>
+</form>
+</mat-card>

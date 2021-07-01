@@ -1,0 +1,36 @@
+<mat-vertical-stepper #stepper>
+  <mat-step >
+      <ng-template matStepLabel>Change status of product</ng-template>
+      <div fxLayout="row" >
+        <h3><p style="font-style: italic;text-align: center;">Do you want to change status of the <strong>{{recievedRow.Title}}</strong> to <strong>SOLD</strong>? </p></h3>
+      </div>
+      <div fxLayoutAlign="center start">
+        <button mat-raised-button color="primary" class="sold" matStepperNext>Next</button>
+      </div>
+  </mat-step>
+  <mat-step #second [stepControl]="userNameForm">
+    <form [formGroup]="userNameForm">
+      <ng-template matStepLabel>Fill out the buyer username</ng-template>
+       <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput 
+        placeholder="Username" 
+        formControlName="UserName" required>
+      </mat-form-field>
+      <div fxLayoutAlign="center start" fxLayoutGap="5px">
+        <button mat-raised-button  matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary"  matStepperNext [disabled]="!userNameForm.valid">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step style="padding:0 24px 24px 5px">
+    <ng-template matStepLabel>Done</ng-template>
+    <div fxLayoutAlign="start start" style="margin-top:10px;">
+      <p><strong>You are now done.</strong></p>
+    </div>
+    <div fxLayoutAlign="space-between start" fxLayoutGap="5px">
+      <button mat-raised-button class="cancel" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" class="sold" (click)="ChangeProductStatusToSold();openChangeStatusDialog.close(true)">Sold</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

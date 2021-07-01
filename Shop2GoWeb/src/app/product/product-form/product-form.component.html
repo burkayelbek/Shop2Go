@@ -1,0 +1,74 @@
+<div fxFlex>
+  <div fxLayout="row" fxLayoutAlign="start start"><h1 style="margin:0 30px;margin-top:30px;margin-bottom:15px;"> <strong>Add Products</strong></h1></div>
+  <form [formGroup]="productsForm" (ngSubmit)="PostProduct(productsForm.value)" autocomplete="off">
+      <mat-card fxFlex="100"fxLayout="row wrap" >
+        <div fxLayout="column" style="margin:0px 15px;" fxFlex="65" fxFlex.lt-md>
+          <mat-label><strong>Product Title</strong></mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput id="title" name="title" formControlName="Title"  onKeyPress="if(this.value.length==75) return false;"  maxlength="75">
+          </mat-form-field>
+          <span fxLayoutAlign="start start">
+            <label *ngIf="Title.touched && Title.errors?.maxlength" style="color:red;"><strong>Maximum 75 characters required</strong></label>
+          </span>
+  
+          <mat-label><strong>Product Description</strong></mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput 
+            formControlName="Description"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="3"
+            cdkAutosizeMaxRows="10"
+            onKeyPress="return ( this.value.length < 300 );"
+            maxlength="300"
+            ></textarea>
+          </mat-form-field>
+          <span fxLayoutAlign="start start">
+            <label *ngIf="Description.touched && Description.errors?.maxlength" style="color:red;"><strong>Maximum 300 characters required</strong></label>
+          </span>
+  
+          <mat-form-field appearance="fill" >
+            <mat-label><strong>Select Category</strong></mat-label>
+            <mat-select formControlName="CategoryId">
+              <mat-option *ngFor="let item of category" [value]="item.Id">
+                {{item.Name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-label><strong>Product's Price</strong></mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="Price" onKeyPress="if(this.value.length==12) return false;" maxlength="12">
+          </mat-form-field>
+          <span fxLayoutAlign="start start">
+            <label *ngIf="Price.touched && Price.errors?.maxlength" style="color:red;"><strong>Maximum 12 characters required</strong></label>
+          </span>
+
+          <div fxLayout="column"  fxLayoutGap="5px" style="margin-top:10px;" fxFlex>
+            <div *ngIf="srcResult!=null; else elseBlock"><mat-label><h2 style="font-weight: 600;" >Product's Images</h2></mat-label> </div>
+            <ng-template #elseBlock></ng-template>
+            <div fxLayout="row wrap" fxLayoutGap="5px" fxFlex >
+              <span fxFlex ><img  *ngFor="let img of base64Data" [src]="'data:image/jpg;base64,'+img |safe" style="height: 150px;width: 140px;border:1px solid black;margin-right: 5px;"></span>
+            </div>
+          </div>
+
+          <button  mat-raised-button type="submit" color="primary"><mat-icon>add_shopping_cart</mat-icon>Add Product</button>
+          
+        </div>
+        <div fxLayout="column" fxFlex  fxFlex>
+          <mat-label><strong>Add Product Image</strong></mat-label>
+          <div fxLayout="column" fxLayoutAlign="center center" fxFlex fxLayoutGap="10px" style="background-color: #e4e7e7;margin-bottom: 15px;">
+              <input #fileInput (change)="handleFile($event, fileInput)" type="file" id="file" accept="image/*" multiple  style="display: none;">
+              <span fxLayoutAlign="center start" ><button fxFlex mat-raised-button type="button" class="select-file" (click)="fileInput.click()"><mat-icon>upload</mat-icon>Upload Image</button></span>
+          </div>
+            <span fxLayout="row" fxLayoutAlign="center start"><button class="mat-settings" fxFlex mat-raised-button (click)="reset($event)" color="primary"><mat-icon>restart_alt</mat-icon>Reset Images</button></span>
+        </div>
+      </mat-card>
+  </form>
+</div>
+
+
+   

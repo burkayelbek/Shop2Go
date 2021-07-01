@@ -1,0 +1,21 @@
+<div class="login-container">
+    <mat-card fxLayoutGap="5px">
+    <mat-toolbar class="login-toolbar" color="primary">Login</mat-toolbar>
+    <form [formGroup]="userLoginForm" autocomplete="off" (submit)="onSubmit(userLoginForm)">
+        <div fxLayout="column" >
+            <mat-form-field>
+                <mat-icon matPrefix>person_outline</mat-icon>
+                <input autofocus type="text" matInput placeholder="Username or Email" formControlName="UserName">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-icon matPrefix>lock_outline</mat-icon>
+                <input type="password" autocomplete="false" matInput placeholder="Password" formControlName="Password">
+            </mat-form-field>
+            <div>
+                <button type="submit" mat-raised-button color="primary">Login</button>
+                <a [routerLink]="['/ForgotPassword']" fxLayoutAlign="center center" style="margin-top: 10px;"><strong>Forgot Password?</strong></a>
+            </div>
+        </div>
+    </form>
+    </mat-card>
+</div>

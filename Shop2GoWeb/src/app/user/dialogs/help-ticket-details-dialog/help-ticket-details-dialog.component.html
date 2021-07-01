@@ -1,0 +1,73 @@
+<div style="margin-top: 10px;">
+    <form [formGroup]="ticketDetailsForm" autocomplete="off">
+        <div fxFlex="100" fxLayout="column" style="overflow-x: auto;">
+            <div style="margin-bottom: 10px;">
+                <span><button mat-icon-button class="close" mat-button (click)="onNoClick($event)"> <mat-icon>close</mat-icon></button></span>
+            <mat-label id="Priority" name="Priority"  [ngStyle]="{'color':recievedRow.value.Priority==0?'green':recievedRow.value.Priority==1?'#F79122':'red'}" style="font-weight: 500;">
+                {{recievedRow.value.Priority==0?'Low':recievedRow.value.Priority==1?'Medium':'High'}}
+            </mat-label>
+            </div>
+            <mat-label style="font-weight: bold;">Ticket ID</mat-label>
+            <div fxLayout="row" fxLayoutGap="75px" >
+                <h4>
+                    <mat-label style="font-weight: 500;" name="Id">#{{recievedRow.value.Id}}</mat-label>
+                </h4>
+                
+            </div>
+            <mat-divider class="special-divider"></mat-divider>
+            <mat-form-field appearance="standard">
+                <mat-label style="font-weight: bold;">Name & Surname</mat-label>
+                <input matInput id="UserFullName" name="UserFullName" formControlName="UserFullName" placeholder="Name & Surname" style="font-weight: 500;"> 
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label style="font-weight: bold;">Title</mat-label>
+                <input matInput id="Title" name="Title"  formControlName="Title" placeholder="Title" style="font-weight: 500;" >
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+              <mat-label style="font-weight: bold;"> Message</mat-label>
+              <textarea matInput
+              formControlName="Message"
+              id="Message" 
+              name="Message"
+              placeholder="Message"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="4"
+              cdkAutosizeMaxRows="20"
+              style="font-weight: 500;"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label style="font-weight: bold;">Created On</mat-label>
+                <input matInput id="CreatedOn" name="CreatedOn"  formControlName="CreatedOn" placeholder="Created On" style="font-weight: 500;"> 
+            </mat-form-field>
+            <mat-form-field appearance="fill" >
+                <mat-label style="font-weight: bold;">Status</mat-label>
+                <mat-select id="Status"  formControlName="Status" style="font-weight: 500;" [(ngModel)]="recievedRow.value.Status" [ngStyle]="{'color':recievedRow.value.Status==0?'green':'red'}" required>
+                  <mat-option [value]="0">Open</mat-option>
+                  <mat-option [value]="1">Closed</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-divider class="special-divider"></mat-divider>
+
+              <mat-label style="font-weight: bold;"> Feedback Message</mat-label>
+              <mat-form-field appearance="outline">
+                <textarea matInput
+                formControlName="FeedbackMessage"
+                id="FeedbackMessage" 
+                name="FeedbackMessage"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="4"
+                cdkAutosizeMaxRows="20"
+                style="font-weight: 500;"
+                ></textarea>
+              </mat-form-field>
+              <div fxLayoutGap="5px" fxLayoutAlign="space-between start">
+                <button mat-raised-button class="cancel" (click)="onNoClick($event)">Back</button>
+                <button mat-button class="rejected"  (click)="openTicketClosedStatus()">Close Ticket</button>
+              </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,23 @@
+.low {
+  color: green;
+  font-weight: 500;
+}
+
+.medium {
+  color: #F79122;
+  font-weight: 500;
+}
+
+.high {
+  color: red;
+  font-weight: 500;
+}
+
+.header-text{
+  padding-left:30px;
+  margin-top:10px;
+  margin-bottom:5px
+}
+:host /deep/ .mat-select-value-text{
+  font-weight: 550;
+}

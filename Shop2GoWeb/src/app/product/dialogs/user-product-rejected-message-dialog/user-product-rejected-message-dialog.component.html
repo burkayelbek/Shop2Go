@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <h1 fxLayoutAlign="center center"><strong>Rejected Status</strong></h1>
+        <form [formGroup]="rejectedStatusForm" autocomplete="off">
+            <mat-form-field appearance="outline" >
+            <mat-label>Rejected Message</mat-label>
+            <textarea matInput 
+            formControlName="RejectedMessage"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="6"
+            cdkAutosizeMaxRows="10"
+            onKeyPress="if(this.value.length==0) return false;"
+            ></textarea>
+            </mat-form-field>
+         </form>
+    </div>
+    <div fxLayout="row" fxFlex fxLayoutAlign="center start">
+        <button fxFlexFill mat-raised-button color="warn" class="close" (click)="dialogRef.close(true)">Close</button>
+    </div>
+</div>

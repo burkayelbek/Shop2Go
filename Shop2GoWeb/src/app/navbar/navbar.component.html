@@ -1,0 +1,79 @@
+<mat-toolbar fxLayout="row" color="primary">
+  <div fxLayout="row"  id="special-cursor" matTooltip="Homepage" [routerLink]="['']">
+    <mat-icon style="padding-top:4px;">home</mat-icon> 
+    <span style="font-weight: 500;padding-left:5px;letter-spacing: 1px;">Shop2Go</span>
+  </div>
+ 
+  <div fxFlex fxLayout="row" fxHide.xs fxHide.sm fxLayoutAlign="end center">
+    <button mat-stroked-button [routerLink]="['/Messages']" *ngIf="loginCheck() && !roleMatchAdmin()">
+      <fa-icon [icon]="messageIcon" style="font-size:medium;"></fa-icon> Messages
+    </button>
+    <button mat-stroked-button (click)="openSignUpDialog()" *ngIf="!loginCheck()" style="padding:0 5px;">
+      <span class="material-icons" >account_box</span> SIGN UP
+    </button>
+    <button mat-stroked-button [routerLink]="['/Login']" *ngIf="!loginCheck()" >
+      <span class="material-icons" style="font-size:22px;">login</span> LOG IN
+    </button>
+    <button mat-stroked-button [routerLink]="['/Product/Active-Products']" *ngIf="loginCheck() && !roleMatchAdmin()">
+      <fa-icon [icon]="productIcon" style="font-size:medium;"></fa-icon> Product Management
+    </button>
+
+    <button mat-stroked-button (click)="redirectToProfile()" *ngIf="loginCheck() && !roleMatchAdmin()">
+      <span class="material-icons" style="font-size:20px;"> account_circle </span>  Profile
+    </button>
+    
+    <button mat-stroked-button [routerLink]="['/AdminPanel']" *ngIf="loginCheck() && roleMatchAdmin()">
+      <span class="material-icons" style="font-size:20px;">admin_panel_settings</span> Admin Panel
+    </button>
+    <button mat-stroked-button [routerLink]="['/User/Personal-Information']" *ngIf="loginCheck() && !roleMatchAdmin()">
+      <span class="material-icons" style="font-size:20px;"> manage_accounts </span> Account & Ticket
+    </button>
+    <button mat-stroked-button [routerLink]="['/User/Personal-Information']" *ngIf="loginCheck() && roleMatchAdmin()">
+      <span class="material-icons" style="font-size:20px;"> manage_accounts </span> Account 
+    </button>
+    <button mat-stroked-button color="warn" (click)="onLogout()" *ngIf="loginCheck()">
+      <span class="material-icons" style="font-size:20px;">logout</span> Logout
+    </button>
+  </div>
+
+
+<div fxFlex fxLayout="row" fxLayoutAlign="end center" fxHide fxShow.xs fxShow.sm>
+ 
+
+  <button mat-icon-button [matMenuTriggerFor]="dropMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
+
+  <mat-menu #dropMenu="matMenu" fxHide >
+    <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">
+      <button mat-menu-item [routerLink]="['/Messages']" *ngIf="loginCheck() && !roleMatchAdmin()">
+        <fa-icon [icon]="messageIcon" style="margin-left:3px;font-size:medium;padding-right: 5px;color:rgb(75,75,75);"></fa-icon><strong>Messages</strong>
+      </button>
+      <button  mat-menu-item [routerLink]="['/Product/Active-Products']" *ngIf="loginCheck() && !roleMatchAdmin()">
+        <fa-icon [icon]="productIcon" style="margin-left:3px;font-size:medium;padding-right: 5px;color:rgb(75,75,75);"></fa-icon> <strong>Product Management</strong>
+      </button>
+      <button mat-menu-item (click)="openSignUpDialog()" *ngIf="!loginCheck()" style="font-weight: 500;">
+        <mat-icon style="margin-right: 0;padding-right: 7px;">account_box</mat-icon><strong>Sign up</strong>
+      </button>
+      <button mat-menu-item [routerLink]="['/Login']" *ngIf="!loginCheck()" style="font-weight: 500;">
+        <mat-icon style="margin-right: 0;padding-right: 7px;">login</mat-icon> <strong>Log in</strong>
+      </button>
+      <button mat-menu-item (click)="redirectToProfile()" *ngIf="loginCheck() && !roleMatchAdmin()">
+        <mat-icon style="margin-right: 0;font-size:20px;padding-right: 2px;"> account_circle </mat-icon>  <strong>Profile</strong>
+      </button>
+      <button mat-stroked-button [routerLink]="['/AdminPanel']" *ngIf="loginCheck() && roleMatchAdmin()">
+       <mat-icon style="margin-right:0;padding-right: 5px;color:#757574">admin_panel_settings</mat-icon><strong>Admin Panel</strong> 
+      </button>
+      <button mat-menu-item [routerLink]="['/User/Personal-Information']" *ngIf="loginCheck() && !roleMatchAdmin()" style="font-weight: 500; ">
+        <mat-icon style="margin-right: 0;padding-right:3px;font-size:20px;color: rgb(117, 116, 116);"> manage_accounts </mat-icon> <strong>Account & Ticket</strong>
+      </button>
+      <button mat-menu-item [routerLink]="['/User/Personal-Information']" *ngIf="loginCheck() && roleMatchAdmin()" style="font-weight: 500; ">
+        <mat-icon style="margin-right: 0;padding-right:3px;font-size:20px;color: rgb(117, 116, 116);"> manage_accounts </mat-icon> <strong>Account</strong>
+      </button>
+      <button mat-menu-item (click)="onLogout()" *ngIf="loginCheck()" style="color:#f44336; font-weight: 500;">
+        <mat-icon style="color:#f44336;margin-right:0;font-size:20px;">logout</mat-icon> Logout
+      </button>
+    </div>
+  </mat-menu>
+</mat-toolbar>

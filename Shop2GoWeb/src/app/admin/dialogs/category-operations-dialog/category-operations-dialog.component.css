@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+}
+.mat-elevation-z8{
+    width: 100%;
+    overflow-x:auto;
+}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 0 8px !important;
+}
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }

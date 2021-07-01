@@ -1,0 +1,48 @@
+<div class="content-container">
+    <div *ngIf="userDetails" style="margin:5px 5px;">
+        <mat-card class="example-card" style="width: 100%;" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px" fxLayout.lt-lg="column" fxLayoutAlign="center stretch">
+          <div class="avatar-container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <span class="avatar-image-text"><strong>Avatar Image</strong></span>
+            <div mat-card-avatar class="example-header-image">
+              <img  [src]="ProfilePicture?ProfilePicture:'assets/images/user.svg' | safe ">
+            </div>
+              <input #fileInput (change)="handleFile($event, fileInput)" type="file" id="file" accept="image/*" multiple  style="display: none;" hidden>
+              <span><button fxFlex mat-raised-button type="button" color="primary" class="primary-upload-btn" (click)="fileInput.click()"><mat-icon>file_upload</mat-icon> Upload Image</button></span>
+          </div>
+
+          <mat-card fxFlex>
+          <span class="information-header" fxLayout="row" fxLayoutAlign="center start" >Personal Information</span>
+            <form [formGroup]="userInformationForm" >
+              <div class="information-content" fxLayout="column">
+                <mat-form-field appearance="outline">
+                  <mat-label><strong>Username</strong></mat-label>
+                  <input matInput placeholder="Placeholder" formControlName="UserName">
+                  <span matPrefix><mat-icon>person</mat-icon></span>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label><strong>Firstname</strong></mat-label>
+                  <input matInput placeholder="Placeholder" formControlName="FirstName">
+                  <span matPrefix><mat-icon>person_pin</mat-icon></span>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label><strong>Surname</strong></mat-label>
+                  <input matInput placeholder="Placeholder" formControlName="LastName">
+                  <span matPrefix><mat-icon>person_pin</mat-icon></span>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label><strong>Email</strong></mat-label>
+                  <input matInput placeholder="Placeholder" formControlName="Email">
+                  <span matPrefix><mat-icon>alternate_email</mat-icon></span>
+                </mat-form-field>
+             </div>
+            </form>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <span><button mat-raised-button color="primary" class="primary-edit-personel-btn" (click)="openEditPersonalDialog()"> <fa-icon [icon]="userEditIcon" style="font-size:medium;"></fa-icon> Edit Personal Settings</button></span>
+              <span><button mat-raised-button color="primary"  class="primary-change-btn" (click)="openChangePasswordDialog()"><mat-icon>lock_open</mat-icon> Change Password</button></span>
+            </div>
+          </mat-card>
+        </div>
+        </mat-card>
+    </div> 
+</div>

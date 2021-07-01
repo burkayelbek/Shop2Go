@@ -1,0 +1,36 @@
+<div fxflex="100" fxLayoutAlign="center center" style="margin-top:20px;">
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center none" fxFlex="75" fxLayout.lt-md="column" fxLayoutAlign.lt-md="start stretch">
+    <mat-card fxFlex="calc(25%-10px)" >
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" style="height: 100%;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <fa-icon [icon]="faTags" style="font-size:medium;margin-left:3px;"></fa-icon> <span class="menu-header">Products</span> 
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <ul>
+              <li><button mat-button [routerLink]="['/Product/Active-Products']" (click)="showActiveProductsToggle()"><fa-icon [icon]="productIcon" style="font-size:medium;margin-left:3px;"></fa-icon><strong style="padding-left: 5px;"> Active</strong> Products</button></li>
+              <li><button mat-button [routerLink]="['/Product/Inactive-Products']" (click)="showPassiveProductsToggle()"><fa-icon [icon]="productIcon" style="font-size:medium;margin-left:3px;"></fa-icon><strong style="padding-left: 5px;"> Inactive</strong> Products</button></li>
+              <li><button mat-button [routerLink]="['/Product/Sold-Products']" (click)="showSoldProductsToggle()"><fa-icon [icon]="productIcon" style="font-size:medium;margin-left:3px;"></fa-icon><strong style="padding-left: 5px;"> Sold</strong> Products</button></li>
+              
+              <mat-divider></mat-divider>
+              <li ><button mat-button (click)="showFormToggle()" ><mat-icon>add_circle_outline</mat-icon><strong style="padding-left: 5px;">Add</strong> Product</button></li>
+              <mat-divider></mat-divider>
+                <li><button mat-button [routerLink]="['/Product/Favorites']"(click)="showMyFavoritesToggle()"><mat-icon >favorite_border</mat-icon> <span style="padding-left:5px;"><strong>Favorites</strong></span></button></li>
+                  
+          </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card>
+    <mat-card fxFlex="calc(75%-10px)">
+      <app-owned-products *ngIf="showActiveProducts"></app-owned-products>
+      <app-owned-passive-products *ngIf="showPassiveProducts"></app-owned-passive-products>
+      <app-product-form *ngIf="showForm"></app-product-form>
+      <app-favorited-products *ngIf="showFavorites"></app-favorited-products>
+      <app-sold-products *ngIf="showSoldProducts"></app-sold-products>
+    </mat-card>
+  </div>
+</div>
+<br>
+<br>

@@ -1,0 +1,70 @@
+<div fxFlex="100">
+  <div fxLayoutAlign="center start" style="font-size: 20px;">
+    <mat-label><strong>Edit Product</strong></mat-label>
+
+  </div>
+    <form [formGroup]="productsForm" (ngSubmit)="UpdateProduct(productsForm.value)" autocomplete="off">
+      <div fxLayout="row wrap" fxFlex >
+        <mat-card fxLayout="column wrap" fxFlexFill>
+          <mat-label><strong>Title</strong></mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput id="title" name="title" formControlName="Title" placeholder="Title">
+          </mat-form-field>
+  
+          <mat-label><strong>Description</strong></mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput 
+            formControlName="Description"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="4"
+            cdkAutosizeMaxRows="20"
+            ></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" >
+            <mat-label><strong>Select Category</strong></mat-label>
+            <mat-select formControlName="CategoryId">
+              <mat-option *ngFor="let item of category" [value]="item.Id">
+                {{item.Name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <div fxLayout="row" fxLayoutAlign="start stretch" fxFlex>
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxFlex>
+                <input #fileInput (change)="handleFile($event, fileInput)" type="file" id="file" accept="image/*" multiple  style="display: none;">
+                <span><button fxFlex mat-raised-button type="button" class="select-file" (click)="fileInput.click()" >Select Image</button></span>
+                <span><button fxFlex class="mat-settings" mat-raised-button (click)="reset($event)" color="primary">Reset</button></span>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutGap="5px"  style="margin-top:15px;">
+            <img *ngFor="let img of base64Data" [src]="'data:image/jpg;base64,'+img |safe" style="height: 100px;width: 100px;">
+          </div>
+          
+          <mat-label><strong>Price</strong></mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="Price" onKeyPress="if(this.value.length==12) return false;">
+            <span matSuffix>.00 TL</span>
+          </mat-form-field>
+          <div style="margin-bottom:15px;">
+            <mat-hint style="color:red;"><strong>* Before you approve, you should know that your product will be inactive!</strong></mat-hint>
+          </div>
+          
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <button mat-raised-button  (click)="openEditDialog.close(true);$event.preventDefault()"color="warn"> Close</button>
+            <button mat-raised-button type="submit" (click)="openEditDialog.close(true)"color="primary"><mat-icon>edit</mat-icon> Edit Product</button>
+          </div>
+  
+          
+        </mat-card>
+      </div>
+    </form>
+  </div>
+  
+  
+     

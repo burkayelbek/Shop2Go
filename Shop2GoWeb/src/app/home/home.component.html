@@ -1,0 +1,63 @@
+<div fxLayout="column">
+    <div class="container-slider" fxLayout="row" fxLayoutAlign="start start"  >
+        <div style="width: 100%; height: 500px;border-radius: 8px; background-color: rgb(177, 175, 175)"  fxFlex>
+            <ng-image-slider #nav [images]="imageObject" [infinite]="true" [autoSlide]="{interval: 5, stopOnHover: false}" [animationSpeed]="5"[arrowKeyMove]="false" [showArrow]="true" [imageSize]="{width: '100%', height: 500}" slideImage="5">
+            </ng-image-slider>
+        </div>
+    </div>
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="center start" class="container">
+        <div  fxLayoutAlign="center start" style="margin-left:11%;margin-right:15%;margin-bottom: 2%;" >
+            <mat-card fxFlex fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="10px grid" fxLayoutAlign.lt-lg="center start">
+                <div  *ngFor="let item of category">
+                    <span fxLayout="column">
+                        <button  [matTooltip]="item.Name" matTooltipPosition="above" mat-raised-button color="primary" [routerLink]="['/Products-Category/', item.Name]"><mat-icon>{{item.MatIconName}}</mat-icon></button>
+                        <span class="category-item-text">{{item.Name}}</span>
+                    </span>
+                </div>
+            </mat-card>
+        </div>
+        <div fxFlex="75" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px" fxLayoutAlign="start start"  fxLayoutAlign.lt-md="start stretch" fxLayoutAlign.md="center start">
+            <div *ngFor="let item of products" fxFlex.xs="0 0 calc(100% - 5px)" fxFlex.sm="0 0 calc(100%-5px)" > 
+                <mat-card class="product-card" (click)="ProductDetailNavigate(item.product.Id)">
+                    <div fxLayout="row" fxLayoutAlign="start start"style="margin-left:10px;">
+                        <div mat-card-avatar class="header-image">
+                            <img [src]="item.profilePicResult.ProfilePicture?item.profilePicResult.ProfilePicture:'assets/images/user.svg' | safe ">
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex>
+                            <span style="padding:0;margin:0;"><h1 style="margin-bottom:0;margin-top:7px;"><strong>{{item.product.User.UserName}}</strong></h1></span>
+                            <span class="date-style">{{item.product.PublishedDate | date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                       
+                        <div fxFlex fxLayoutAlign="end start" fxLayout="row wrap" style="margin-top:2px;">
+                            <span style="margin-right: 5px;" >
+                                <button mat-icon-button matTooltip="Send Message" *ngIf="loginCheck() && !checkUserId(item.product.UserID) && !roleMatchAdmin()" (click)="openChatDialog(item.product.UserID);$event.stopPropagation()">
+                                    <fa-icon [icon]="commentIcon" style="font-size: large;"></fa-icon>
+                                </button>
+                            </span>
+                            <span>
+                                <button mat-icon-button matTooltip="Add/Remove Favorite" (click)="ToggleFavorite(item.product.Id);$event.stopPropagation()" *ngIf="loginCheck() && !checkUserId(item.product.UserID) && !roleMatchAdmin()">
+                                    <mat-icon color="warn">favorite</mat-icon>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+    
+                    <div style="margin-top:10px;" fxLayout="column">
+                        <div fxFlex="50" >
+                            <ng-image-slider #nav [images]="[{image:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', thumbImage:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', alt:'', title:''}]" [arrowKeyMove]="false" [showArrow]="false" [imageSize]="{width: '100%', height: 300}" slideImage="1">
+                            </ng-image-slider>
+                        </div>
+                    </div>
+    
+                    <div fxLayout="column" fxLayoutAlign="start start">
+                        <span class="category-style"><p class="p-position">{{item.product.Category.Name}}</p></span>
+                        <span class="position"><h1  style="padding:0;margin:0"><strong>{{item.product.Title}}</strong></h1></span>
+                        <span ><h2 class="h2-properties">{{item.product.Price}} ₺</h2></span>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <mat-divider style="margin-top:20px;"></mat-divider>
+</div>
+

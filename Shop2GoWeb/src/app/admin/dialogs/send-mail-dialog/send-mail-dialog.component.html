@@ -1,0 +1,27 @@
+<div fxLayout="column">
+    <div fxLayoutAlign="end start">
+        <button mat-icon-button (click)="openMailDialog.close(true)">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start" style="margin-bottom:15px;">
+        <span style="font-weight: 550;font-size:20px;">Sending Email Process</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div fxLayout="column" fxLayoutAlign="start start" style="margin: 10px 0;">
+        <span style="font-weight: 550;">To :<strong> {{recievedMailData.mailValue.Email}}</strong></span>
+        <span style="font-weight: 550;">Username :<strong> {{recievedMailData.mailValue.UserName}}</strong></span>
+        <span style="font-weight: 550;">Name & Surname :<strong> {{recievedMailData.mailValue.FullName}}</strong></span>
+    </div>
+    <div>
+        <form [formGroup]="mailForm">
+            <mat-form-field appearance="fill" style="min-width: 320px;">
+                <mat-label>Mail Subject</mat-label>
+                <textarea matInput rows="5" formControlName="Content"></textarea>
+              </mat-form-field>
+        </form>
+    </div>
+    <span>
+        <button fxFlex mat-raised-button type="submit" color="primary" (click)="SendMailToUser();openMailDialog.close(true)">Send</button>
+    </span>
+</div>

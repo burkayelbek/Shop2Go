@@ -1,0 +1,52 @@
+<div fxLayout="row wrap" fxLayoutAlign="start start">
+    <div style="margin:10px 25px;" fxLayout="row" fxLayoutGap.lt-sm="5px"  fxLayout.lt-sm="column" fxLayoutAlign="space-between start" fxLayoutAlign.lt-sm="center center" fxFlex>
+        <span>
+            <button mat-raised-button class="text-color" (click)="ToggleShowStatus()" [ngStyle]="{'background-color':toggleShowStatus?'red':'#F79122'}">Show {{toggleShowStatus?'Declined':'Waiting'}} Products</button>
+        </span>
+        <span>
+            <button mat-raised-button color="primary" (click)="openCategoryOperationsDialog()" >Category Operations</button>
+
+        </span>
+    </div>
+    <div fxFlex="100" fxLayoutAlign="start center" style="margin:20px 20px;" fxLayout="row wrap" fxLayout.lt-sm="row wrap">
+        <div fxLayout="row wrap"  fxLayoutGap="10px" fxLayoutAlign="start start"  >
+            <div *ngFor="let item of passiveProducts" fxFlex.xs="0 1 calc(100% - 10px)" fxFlex.sm="0 1 calc(100%-10px)" > 
+                <mat-card class="example-card" (click)="ProductDetailNavigate(item.product.Id)" style="margin:10px 5px;" >
+                    <div fxLayout="row" fxLayoutAlign="start start"style="margin-left:10px;">
+                        <div mat-card-avatar class="header-image">
+                            <img [src]="item.profilePicResult.ProfilePicture?item.profilePicResult.ProfilePicture:'assets/images/user.svg' | safe ">
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex>
+                            <span style="padding:0;margin:0;"><h1 style="margin-bottom:0;margin-top:7px;"><strong>{{item.product.User.UserName}}</strong></h1></span>
+                            <span class="date-style">{{item.product.PublishedDate | date: 'dd/MM/yyyy'}}</span>
+                            <span><p style="font-weight: 500;" [ngStyle]="{'color':item.product.isApproved==0?'#F79122':item.product.isApproved==1?'green':'red'}"><strong>{{item.product.isApproved==0?'Waiting':item.product.isApproved==1?'Accepted':'Declined'}}</strong></p></span>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <div fxFlex>
+                            <ng-image-slider #nav [images]="[{image:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', thumbImage:item.tempImage?.Image?item.tempImage?.Image:'assets/images/empty-product.svg', alt:'', title:''}]" [arrowKeyMove]="false" [showArrow]="false" [imageSize]="{width: '100%', height: 250}" slideImage="1">
+                            </ng-image-slider>
+                        </div>
+                    </div>
+                        <div fxLayout="column" fxLayoutAlign="start stretch">
+                            <span class="category-style"><p class="p-position">{{item.product.Category.Name}}</p></span>
+                            <span class="position"><h1  style="padding:0;margin:0"><strong>{{item.product.Title}}</strong></h1></span>
+                            <div fxLayout="row" fxLayoutAlign="start start" >
+                                <h2 class="h2-properties">{{item.product.Price}} ₺</h2>
+                                <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="3px" style="margin-top:10px;margin-right: 5px;" fxFlex>
+                                    <span>
+                                        <button mat-icon-button type="submit" (click)="openRejectDetailsDialog(item.product);$event.stopPropagation()"><mat-icon color="warn">cancel</mat-icon></button>
+                                    </span>
+                                    <span>
+                                        <button mat-icon-button type="submit" (click)="openApproveDetailsDialog(item.product.Id);$event.stopPropagation()"><mat-icon style="color: green;">check_circle</mat-icon></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<mat-divider style="margin-top:20px;"></mat-divider>

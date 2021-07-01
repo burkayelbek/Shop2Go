@@ -1,0 +1,125 @@
+<div fxFlex="100" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="center stretch">
+        <div *ngIf="product" fxFlex> 
+            <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
+                <mat-card class="example-card"  fxFlex.xs="100" fxFlex.sm="90" fxFlex.md="90" fxFlex>
+                    <div fxFlex="50" >
+                        <ng-image-slider #nav [images]="imageObject" [infinite]="false" [imageSize]="{width: '95%', height: 400}" slideImage="1">
+                        </ng-image-slider>
+                    </div>
+                    <div fxFlex="50" fxLayout="column" >
+                        <div style="margin-left:12px;" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start" >
+                            <a [routerLink]="['/home']" fxLayoutAlign="start center"> <mat-icon style="margin-right: 5px;">keyboard_backspace</mat-icon> Back to homepage</a>
+                            <div fxLayout="column" fxFlex fxLayoutAlign="end end" >
+                                <span class="date-style">{{product.PublishedDate | date: 'dd/MM/yyyy'}}</span>
+                                <div fxLayout="row" fxFlex fxLayoutAlign="start start">
+                                    <span>
+                                        <button mat-icon-button matTooltip="Edit Product" (click)="openEditProductDialog(product)" *ngIf="checkUserId(product.UserID)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </span>
+                                    <span >
+                                        <button mat-icon-button  matTooltip="Delete" (click)="openDeleteProductDialog(product.Id)" *ngIf="checkUserId(product.UserID)">
+                                            <mat-icon color="warn">delete</mat-icon>
+                                        </button>
+                                    </span>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div fxLayout="row" class="content-header" fxLayout.lt-sm="column" >
+                            <div fxLayout="column" fxLayoutAlign="start start" fxFlex >
+                                <span class="category-style">{{product.Category.Name}}</span>
+                                <span class="title-content"><h1><strong>{{product.Title}}</strong></h1></span>
+                                <span style="font-size: x-large;font-weight: 500;">₺{{product.Price}}</span>
+                            </div>
+                            <div fxLayout="row" fxFlex fxLayout.lt-md="column" >
+                                <div fxLayout="column" fxLayoutAlign="end end" fxLayoutAlign.lt-md="start center" fxFlex >
+                                   
+                                    <div mat-card-avatar class="example-header-image" fxFlex matTooltip="Go to profile" matTooltipPosition="above" (click)="ProfileDetailNavigate(product.UserID)">
+                                        <img  [src]="ProfilePicture?ProfilePicture:'assets/images/user.svg' | safe ">
+                                    </div>
+                                    <span class="username-text">
+                                        <strong>@</strong>{{product.User.UserName}}
+                                    </span>
+                                    <div fxLayoutAlign="start start" fxFlex style="margin-top:7px;">
+                                        <span style="font-weight: 500;">{{AverageRating | number: '1.0-1'}}</span>
+                                        <div *ngFor="let num of starArr">
+                                            <span class="star on" *ngIf="AverageRating - num.Id >= 0;else halfStar"></span>
+                                            <ng-template #halfStar ><span class="star half" *ngIf="(AverageRating - (num.Id - 1)) % 1 > 0;else emptyStar " ></span></ng-template>
+                                            <ng-template #emptyStar ><span class="star" ></span></ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left:15px;margin-top:20px" fxLayout="column" >
+                            <button fxFlex mat-raised-button color="primary" *ngIf="!checkUserId(product.UserID) && !roleMatchAdmin()" (click)="MessageDetailNavigate(product.UserID);$event.stopPropagation()" style="white-space: normal;">
+                                <fa-icon [icon]="commentIcon" style="font-size: medium;"></fa-icon> Send Message
+                            </button>
+                        </div>
+                        <div class="second-btn-container" fxLayoutGap="5px" fxLayout="row" fxLayout.lt-md="column" >
+                            <button fxFlex mat-flat-button class="btn-second-style" (click)="ToggleFavorite(product.Id)" *ngIf="loginCheck() && !checkUserId(product.UserID) && !roleMatchAdmin()">
+                                 <mat-icon color="warn" >favorite</mat-icon> {{userFavoritedProduct == null?'Add to ':'Remove from '}}Favorites
+                            </button>
+                        </div>
+                    
+                        <div fxLayout="column" class="desc-container" fxFlex>
+                            <span class="desc-header"><p>Description</p></span>
+                            <span class="desc-content"><p>{{product.Description}}</p></span>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:25px;" fxLayout="row" fxLayoutAlign="center start">
+        <span style="font-size:20px;font-weight:bold;">Similar Products</span>
+    </div>
+    <!-- RANDOM PRODUCTS START -->
+    <div fxLayout="column" fxLayoutAlign="center center" >
+        <div fxFlex fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="5px"  fxLayoutAlign="center start" style="margin-top:15px;">
+            <div *ngFor="let rndProducts of randomProductList">
+                <mat-card class="product-card" (click)="ProductDetailNavigate(rndProducts.randomProduct.Id)">
+                    <div fxLayout="row" fxLayoutAlign="start start"style="margin-left:10px;">
+                        <div mat-card-avatar class="header-image">
+                            <img [src]="rndProducts.profilePicResult.ProfilePicture?rndProducts.profilePicResult.ProfilePicture:'assets/images/user.svg' | safe " class="rnd-user-img">
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex>
+                            <span style="padding:0;margin:0;"><h1 style="margin-bottom:0;margin-top:7px;"><strong>{{rndProducts.randomProduct.User.UserName}}</strong></h1></span>
+                            <span class="date-style">{{rndProducts.randomProduct.PublishedDate | date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                       
+                        <div fxFlex fxLayoutAlign="end start" fxLayout="row wrap" style="margin-top:2px;">
+                            <span style="margin-right: 5px;" >
+                                <button mat-icon-button matTooltip="Send Message" *ngIf="loginCheck() && !checkUserId(rndProducts.randomProduct.UserID) && !roleMatchAdmin()" (click)="openChatDialog(rndProducts.randomProduct.UserID);$event.stopPropagation()">
+                                    <fa-icon [icon]="commentIcon" style="font-size: large;"></fa-icon>
+                                </button>
+                            </span>
+                            <span>
+                                <button mat-icon-button matTooltip="Add/Remove Favorite" (click)="ToggleFavorite(rndProducts.randomProduct.Id);$event.stopPropagation()" *ngIf="loginCheck() && !checkUserId(rndProducts.randomProduct.UserID) && !roleMatchAdmin()">
+                                    <mat-icon color="warn">favorite</mat-icon>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+        
+                    <div style="margin-top:10px;" fxLayout="column">
+                        <div fxFlex="50" >
+                            <ng-image-slider #nav [images]="[{image:rndProducts.tempImage?.Image?rndProducts.tempImage?.Image:'assets/images/empty-product.svg', thumbImage:rndProducts.tempImage?.Image?rndProducts.tempImage?.Image:'assets/images/empty-product.svg', alt:'', title:''}]" [arrowKeyMove]="false" [showArrow]="false" [imageSize]="{width: '100%', height: 300}" slideImage="1">
+                            </ng-image-slider>
+                        </div>
+                    </div>
+        
+                    <div fxLayout="column" fxLayoutAlign="start start">
+                        <span class="category-style"><p class="p-position">{{rndProducts.randomProduct.Category.Name}}</p></span>
+                        <span class="position"><h1  style="padding:0;margin:0"><strong>{{rndProducts.randomProduct.Title}}</strong></h1></span>
+                        <span ><h2 class="h2-properties">{{rndProducts.randomProduct.Price}} ₺</h2></span>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!-- RANDOM PRODUCTS END -->
+</div>
+
